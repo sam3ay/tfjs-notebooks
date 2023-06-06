@@ -14,13 +14,22 @@
 	"workspaceFolder": "/workspaces",
 	"features": {
 		"ghcr.io/joshuanianji/devcontainer-features/github-cli-persistence:0": {},
-		"ghcr.io/rio/features/chezmoi:1": {}
+		"ghcr.io/rio/features/chezmoi:1": {},
+		"ghcr.io/devcontainers/features/python:1": {
+			"installTools": true,
+			"installJupyterlab": true,
+			"version": "latest"
+		}
 	},
 	// Configure tool-specific properties.
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"xabikos.JavaScriptSnippets"
+				"xabikos.JavaScriptSnippets",
+				"ms-toolsai.jupyter",
+				"ms-toolsai.vscode-jupyter-cell-tags",
+				"ms-toolsai.jupyter-keymap",
+				"ms-python.python"
 			]
 		}
 	},
@@ -32,10 +41,9 @@
 	// "forwardPorts": [],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "chezmoi init --apply https://github.com/sam3ay/dotfiles.git",
+	"postCreateCommand": "chezmoi init --apply https://github.com/sam3ay/dotfiles.git"
 
 	// "customizations": {},
 
 	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-	"remoteUser": "node"
 }

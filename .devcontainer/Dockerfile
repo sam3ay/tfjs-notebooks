@@ -1,8 +1,14 @@
-# Dockerfile to build a prebuilt image to run this example on mybinder.org.
-FROM node:lts-bullseye
+# See here for image contents: https://github.com/microsoft/vscode-dev-containers/tree/v0.205.2/containers/dotnet/.devcontainer/base.Dockerfile
+# [Choice] .NET version: 6.0, 5.0, 3.1, 6.0-bullseye, 5.0-bullseye, 3.1-bullseye, 6.0-focal, 5.0-focal, 3.1-focal
+ARG VARIANT="7.0-bullseye-slim"
+FROM mcr.microsoft.com/vscode/devcontainers/dotnet:0-${VARIANT}
 
+# [Choice] Node.js version: none, lts/*, 16, 14, 12, 10
+ARG NODE_VERSION="16"
+RUN if [ "${NODE_VERSION}" != "none" ]; then su vscode -c "umask 0002 && . /usr/local/share/nvm/nvm.sh && nvm install ${NODE_VERSION} 2>&1"; fi
+# [Optional] Uncomment this section to install additional OS packages.
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-	&& apt-get install -y --no-install-recommends \
+	&& apt-get -y install --no-install-recommends \
 	cmake \
 	curl \
 	fzf \
@@ -10,14 +16,5 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 	zsh \
 	&& rm -rf /var/lib/apt/lists/*
 
-# Support UTF-8 filename in Python (https://stackoverflow.com/a/31754469)
-ENV LC_CTYPE=C.UTF-8
-
-# Install tslab
-RUN npm install -g tslab \
-	&& tslab install
-
-# Notes:
-# 2. To use JupyterNotebook, replace "lab" with notebook".
-# 3. Set --allow-root in case you want to run jupyter as root.
-CMD ["jupyter", "lab", "--ip=0.0.0.0"]
+# [Optional] Uncomment this line to install global node packages.
+# RUN su vscode -c "source /usr/local/share/nvm/nvm.sh && npm install -g <your-package-here>" 2>&1

@@ -13,8 +13,15 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 	curl \
 	fzf \
 	libzmq3-dev \
+	python3-pip \
 	zsh \
-	&& rm -rf /var/lib/apt/lists/*
+	&& rm -rf /var/lib/apt/lists/* \
+	&& pip3 install --no-cache-dir -U jupyterlab
+
+# Error needs interactive?
+# RUN dotnet tool install -g Microsoft.dotnet-interactive 
+# RUN dotnet-interactive jupyter install
+
 
 # [Optional] Uncomment this line to install global node packages.
 # RUN su vscode -c "source /usr/local/share/nvm/nvm.sh && npm install -g <your-package-here>" 2>&1

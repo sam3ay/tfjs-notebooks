@@ -34,7 +34,8 @@
 				"Ionide.Ionide-fsharp",
 				"dbaeumer.vscode-eslint",
 				"ms-dotnettools.csharp",
-				"ms-toolsai.jupyter-renderers"
+				"ms-toolsai.jupyter-renderers",
+				"ms-azuretools.vscode-docker"
 			]
 		}
 	},
